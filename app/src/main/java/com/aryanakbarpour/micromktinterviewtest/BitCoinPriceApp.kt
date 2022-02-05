@@ -2,9 +2,11 @@ package com.aryanakbarpour.micromktinterviewtest
 
 import android.app.Application
 import com.aryanakbarpour.micromktinterviewtest.data.remote.PriceApiService
+import dagger.hilt.android.HiltAndroidApp
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
+@HiltAndroidApp
 class BitCoinPriceApp : Application() {
 
     val retrofit: PriceApiService = Retrofit.Builder()
