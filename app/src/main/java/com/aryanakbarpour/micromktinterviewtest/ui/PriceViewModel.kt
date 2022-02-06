@@ -26,19 +26,34 @@ class PriceViewModel @Inject constructor(
     private val _latestPrice = MutableLiveData<BitCoinPrice?>()
     val latestPrice: MutableLiveData<BitCoinPrice?> = _latestPrice
 
+    private var _recentPricesList = ArrayList<BitCoinPrice>()
+    val recentPricesList = _recentPricesList
+
     fun retrieveLatestPrice(){
 
         viewModelScope.launch {
             _status.value = APIServiceStatus.LOADING
             try{
-                _latestPrice.value = priceApi.getLatestBitCoinPrice()
-                _status.value = APIServiceStatus.DONE
+                val apiResult = priceApi.getLatestBitCoinPrice()
+                if (apiResult != null) {
+                    if (recentPricesList.isEmpty() || recentPricesList.last().time.updated != apiResult.time.updated)
+                        recentPricesList.add(apiResult)
+                    _latestPrice.value = apiResult
+                    _status.value = APIServiceStatus.DONE
+                } else {
+                    throw KotlinNullPointerException("Call from api is null")
+                }
+
             } catch (e: Exception) {
                 _status.value = APIServiceStatus.ERROR
                 _latestPrice.value = null
                 e.printStackTrace()
             }
         }
+    }
+
+    fun clearRecentPrices() {
+        _recentPricesList.clear()
     }
 
 }
