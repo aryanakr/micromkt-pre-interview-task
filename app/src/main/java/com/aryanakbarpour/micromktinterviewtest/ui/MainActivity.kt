@@ -8,15 +8,10 @@ import android.content.IntentFilter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-import android.widget.Button
-import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
 
-import com.aryanakbarpour.micromktinterviewtest.R
-import com.aryanakbarpour.micromktinterviewtest.UpdateService
 import com.aryanakbarpour.micromktinterviewtest.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 
 
 @AndroidEntryPoint
@@ -36,20 +31,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this).get(PriceViewModel::class.java)
-
+        viewModel.retrieveLatestPrice()
 
         binding.startBtn.setOnClickListener {
             startStopUpdate()
         }
 
         viewModel.latestPrice.observe(this) {
-            println("oversations here")
             it?.let { latestPrice ->
-                binding.gbpRateText.text = latestPrice.bpi.GBP.rate
-                binding.usdRateText.text = latestPrice.bpi.USD.rate
-                binding.eurRateText.text = time.toString()
+                binding.gbpRateText.text = String.format("%.3f",latestPrice.bpi.GBP.rate_float)
+                binding.usdRateText.text = String.format("%.3f",latestPrice.bpi.USD.rate_float)
+                binding.eurRateText.text = String.format("%.3f",latestPrice.bpi.EUR.rate_float)
 
-                binding.updateTimeText.text = latestPrice.time.updated
+                binding.updateTimeText.text = latestPrice.time.updateduk
+                binding.timerText.text = time.toString()
             }
         }
 
@@ -61,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     private val updatePrice: BroadcastReceiver = object: BroadcastReceiver()
     {
         override fun onReceive(context: Context?, intent: Intent?) {
-            print("on Recieve lnlnlnlnl")
             intent?.let {
                 time = it.getDoubleExtra(UpdateService.TIME_EXTRA, 0.0)
             }
@@ -87,6 +81,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun stopUpdate() {
         stopService(serviceIntent)
+        time = 0.0
+        binding.timerText.text = ""
         binding.startBtn.text = "Start"
         updateStarted = false
     }

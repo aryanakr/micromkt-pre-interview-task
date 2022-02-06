@@ -1,7 +1,6 @@
 package com.aryanakbarpour.micromktinterviewtest.ui
 
 import android.app.Application
-import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -28,6 +27,7 @@ class PriceViewModel @Inject constructor(
     val latestPrice: MutableLiveData<BitCoinPrice?> = _latestPrice
 
     fun retrieveLatestPrice(){
+
         viewModelScope.launch {
             _status.value = APIServiceStatus.LOADING
             try{

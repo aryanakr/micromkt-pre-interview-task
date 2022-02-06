@@ -10,7 +10,7 @@
         android:id="@+id/usd_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="USD Rate (\u0024):"
+        android:text="@string/usd_rate_u0024"
         android:layout_margin="24dp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textSize="18dp"
-        android:text="1235.20"
+        android:textSize="18sp"
+        tools:text="1325.20"
         app:layout_constraintStart_toEndOf="@id/usd_header_text"
         app:layout_constraintBottom_toBottomOf="@id/usd_header_text"
         app:layout_constraintTop_toTopOf="@id/usd_header_text" />
@@ -32,7 +32,7 @@
         android:id="@+id/gbp_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="GBP Rate (\u00a3):"
+        android:text="@string/gbp_rate_u00a3"
         android:layout_margin="24dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/usd_header_text"
@@ -44,8 +44,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textSize="18dp"
-        android:text="1235.20"
+        android:textSize="18sp"
+        tools:text="1235.20"
         app:layout_constraintStart_toEndOf="@id/gbp_header_text"
         app:layout_constraintBottom_toBottomOf="@id/gbp_header_text"
         app:layout_constraintTop_toTopOf="@id/gbp_header_text" />
@@ -55,7 +55,7 @@
         android:id="@+id/eur_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="EUR Rate (\u20ac):"
+        android:text="@string/eur_rate_u20ac"
         android:layout_margin="24dp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/gbp_header_text"
@@ -67,8 +67,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        android:textSize="18dp"
-        android:text="1235.20"
+        android:textSize="18sp"
+        tools:text="1235.20"
         app:layout_constraintStart_toEndOf="@id/eur_header_text"
         app:layout_constraintBottom_toBottomOf="@id/eur_header_text"
         app:layout_constraintTop_toTopOf="@id/eur_header_text" />
@@ -77,8 +77,8 @@
         android:id="@+id/update_time_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="12:560:12"
-        android:textSize="20dp"
+        tools:text="12:560:12"
+        android:textSize="20sp"
         android:layout_marginTop="36dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +89,7 @@
         android:id="@+id/update_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Last Update"
+        android:text="@string/last_update"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/update_time_text"/>
@@ -98,13 +98,21 @@
         android:id="@+id/start_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Start"
+        android:text="@string/start_button_label"
         android:layout_margin="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/update_header_text"/>
 
-
+    <TextView
+        android:id="@+id/timer_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="18dp"
+        tools:text="0.10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_btn"
+        />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

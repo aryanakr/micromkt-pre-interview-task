@@ -1,4 +1,4 @@
-package com.aryanakbarpour.micromktinterviewtest
+package com.aryanakbarpour.micromktinterviewtest.ui
 
 import android.app.Service
 import android.content.Intent
