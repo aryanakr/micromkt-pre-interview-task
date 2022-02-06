@@ -6,5 +6,5 @@ import retrofit2.http.GET
 interface PriceApiService {
 
     @GET("currentprice.json")
-    suspend fun getLatestBitCoinPrice(): BitCoinPrice
+    suspend fun getLatestBitCoinPrice(): BitCoinPrice?
 }

@@ -7,12 +7,104 @@
     tools:context=".ui.MainActivity">
 
     <TextView
+        android:id="@+id/usd_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:text="USD Rate (\u0024):"
+        android:layout_margin="24dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/usd_rate_text"/>
+
+    <TextView
+        android:id="@+id/usd_rate_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="18dp"
+        android:text="1235.20"
+        app:layout_constraintStart_toEndOf="@id/usd_header_text"
+        app:layout_constraintBottom_toBottomOf="@id/usd_header_text"
+        app:layout_constraintTop_toTopOf="@id/usd_header_text" />
+
+    <TextView
+        android:id="@+id/gbp_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="GBP Rate (\u00a3):"
+        android:layout_margin="24dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/usd_header_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/gbp_rate_text"/>
+
+    <TextView
+        android:id="@+id/gbp_rate_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="18dp"
+        android:text="1235.20"
+        app:layout_constraintStart_toEndOf="@id/gbp_header_text"
+        app:layout_constraintBottom_toBottomOf="@id/gbp_header_text"
+        app:layout_constraintTop_toTopOf="@id/gbp_header_text" />
+
+
+    <TextView
+        android:id="@+id/eur_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EUR Rate (\u20ac):"
+        android:layout_margin="24dp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/gbp_header_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/eur_rate_text"/>
+
+    <TextView
+        android:id="@+id/eur_rate_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textSize="18dp"
+        android:text="1235.20"
+        app:layout_constraintStart_toEndOf="@id/eur_header_text"
+        app:layout_constraintBottom_toBottomOf="@id/eur_header_text"
+        app:layout_constraintTop_toTopOf="@id/eur_header_text" />
+
+    <TextView
+        android:id="@+id/update_time_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="12:560:12"
+        android:textSize="20dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/eur_header_text"
+        />
+
+    <TextView
+        android:id="@+id/update_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Update"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/update_time_text"/>
+
+    <Button
+        android:id="@+id/start_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Start"
+        android:layout_margin="18dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/update_header_text"/>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
