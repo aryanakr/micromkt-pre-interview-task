@@ -5,6 +5,7 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
+import org.junit.runner.RunWith
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -29,21 +30,26 @@ class PriceApiServiceTest : BaseTest() {
             val apiResponse = service.getLatestBitCoinPrice()
 
             Assert.assertNotNull(apiResponse)
+            if(apiResponse!=null){
+                Assert.assertNotNull("time is null", apiResponse.time)
 
-            Assert.assertNotNull("time is null", apiResponse.time)
-            Assert.assertTrue("updated time is wrong", apiResponse.time.updated == "Feb 5, 2022 19:54:00 UTC")
+                Assert.assertTrue("updated time is wrong", apiResponse.time.updated == "Feb 5, 2022 19:54:00 UTC")
 
 
-            Assert.assertNotNull("bpi is null", apiResponse.bpi)
-            Assert.assertNotNull("bpi USD is null", apiResponse.bpi.USD)
-            Assert.assertTrue("USD rate is wrong", apiResponse.bpi.USD.rate == "41,584.9333")
 
-            Assert.assertNotNull("bpi GBP is null", apiResponse.bpi.GBP)
-            Assert.assertTrue("GBP rate is wrong", apiResponse.bpi.GBP.rate == "30,717.6259")
+                Assert.assertNotNull("bpi is null", apiResponse.bpi)
+                Assert.assertNotNull("bpi USD is null", apiResponse.bpi.USD)
 
-            Assert.assertNotNull("bpi EUR is null", apiResponse.bpi.EUR)
-            Assert.assertTrue("EUR rate is wrong", apiResponse.bpi.EUR.rate == "36,321.4036")
 
+                Assert.assertTrue("USD rate is wrong", apiResponse.bpi.USD.rate == "41,584.9333")
+
+
+                Assert.assertNotNull("bpi GBP is null", apiResponse.bpi.GBP)
+                Assert.assertTrue("GBP rate is wrong", apiResponse.bpi.GBP.rate == "30,717.6259")
+
+                Assert.assertNotNull("bpi EUR is null", apiResponse.bpi.EUR)
+                Assert.assertTrue("EUR rate is wrong", apiResponse.bpi.EUR.rate == "36,321.4036")
+            }
         }
     }
 }

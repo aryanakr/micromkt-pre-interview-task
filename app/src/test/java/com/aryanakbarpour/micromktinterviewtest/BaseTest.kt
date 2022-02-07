@@ -5,6 +5,9 @@ import okhttp3.mockwebserver.MockWebServer
 import okio.buffer
 import okio.source
 
+/**
+ * Boilerplate code for testing retrofit in offline mode
+ */
 open class BaseTest {
     val mockWebServer = MockWebServer()
 

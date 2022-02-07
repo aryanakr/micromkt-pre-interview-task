@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
 import androidx.lifecycle.ViewModelProvider
+import com.aryanakbarpour.micromktinterviewtest.R
 
 import com.aryanakbarpour.micromktinterviewtest.databinding.ActivityMainBinding
 import com.github.mikephil.charting.components.XAxis
@@ -37,18 +38,24 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // Set View Binding
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Initialise View Model
         viewModel = ViewModelProvider(this).get(PriceViewModel::class.java)
         viewModel.retrieveLatestPrice()
 
+        // Initialise Chart
         initialiseChart()
 
+        // Set Buttons OnClickListeners
         binding.startBtn.setOnClickListener {
             startStopUpdate()
         }
 
+        // Update chart when configuration of switches change
         binding.gbpChartSwitch.setOnClickListener {
             setChartData()
         }
@@ -59,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             setChartData()
         }
 
+        // Update UI by Observing latest price
         viewModel.latestPrice.observe(this) {
             it?.let { latestPrice ->
                 binding.gbpRateText.text = String.format("%.3f",latestPrice.bpi.GBP.rate_float)
@@ -72,13 +80,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        // Register Receiver for Update Timer
         serviceIntent = Intent(applicationContext, UpdateService::class.java)
         registerReceiver(updatePrice, IntentFilter(UpdateService.TIMER_UPDATED))
 
     }
 
+    /**
+     * Initialises the application price chart
+     */
     private fun initialiseChart() {
-        // Setup chart
         val xAxis: XAxis = binding.lineChart.xAxis
         xAxis.setDrawGridLines(false)
         xAxis.setDrawAxisLine(false)
@@ -91,7 +102,12 @@ class MainActivity : AppCompatActivity() {
         xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
     }
 
+    /**
+     * Resets the data of application price chart
+     */
     private fun setChartData() {
+
+        // Create Chart Points (Entry)
         val gbpEntries: ArrayList<Entry> = ArrayList()
         val usdEntries: ArrayList<Entry> = ArrayList()
         val eurEntries: ArrayList<Entry> = ArrayList()
@@ -102,6 +118,7 @@ class MainActivity : AppCompatActivity() {
             eurEntries.add(Entry(i.toFloat(), viewModel.recentPricesList[i].bpi.EUR.rate_float))
         }
 
+        // Create DataSets
         val gbpLineDataSet = LineDataSet(gbpEntries, "GBP Rate")
         gbpLineDataSet.color = Color.RED
         val usdLineDataSet = LineDataSet(usdEntries, "USD Rate")
@@ -109,6 +126,7 @@ class MainActivity : AppCompatActivity() {
         val eurLineDataSet = LineDataSet(eurEntries, "EUR Rate")
         eurLineDataSet.color = Color.BLUE
 
+        // List selected currencies dataset
         val dataSets: ArrayList<ILineDataSet> = ArrayList()
         if (binding.gbpChartSwitch.isChecked)
             dataSets.add(gbpLineDataSet)
@@ -123,6 +141,10 @@ class MainActivity : AppCompatActivity() {
         binding.lineChart.invalidate()
     }
 
+    /**
+     * OnReceiver in BroadcastReceiver executed at each update interval. Calls the viewmodel to update
+     * price from the API.
+     */
     private val updatePrice: BroadcastReceiver = object: BroadcastReceiver()
     {
         override fun onReceive(context: Context?, intent: Intent?) {
@@ -134,6 +156,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /**
+     * Switches stop and start
+     */
     private fun startStopUpdate(){
         if (updateStarted)
             stopUpdate()
@@ -141,20 +166,27 @@ class MainActivity : AppCompatActivity() {
             startUpdate()
     }
 
+    /**
+     * Starting/restarting the service intent
+     */
     private fun startUpdate() {
         viewModel.clearRecentPrices()
         serviceIntent.putExtra(UpdateService.TIME_EXTRA, time)
         startService(serviceIntent)
         binding.startBtn.text = "Stop"
+        binding.startBtn.icon = getDrawable(R.drawable.ic_baseline_stop_24)
         updateStarted = true
     }
-    //getDrawable(R.drawable.ic_baseline_pause
 
+    /**
+     * Stopping the service intent
+     */
     private fun stopUpdate() {
         stopService(serviceIntent)
         time = 0.0
         binding.timerText.text = ""
         binding.startBtn.text = "Start"
+        binding.startBtn.icon = getDrawable(R.drawable.ic_baseline_play_arrow_24)
         updateStarted = false
     }
 

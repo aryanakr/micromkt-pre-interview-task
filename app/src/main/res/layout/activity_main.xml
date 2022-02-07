@@ -103,11 +103,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/update_time_text"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/start_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/start_button_label"
+        app:icon="@drawable/ic_baseline_play_arrow_24"
         android:layout_margin="18dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -117,10 +118,20 @@
         android:id="@+id/timer_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="18dp"
+        android:layout_marginTop="26dp"
+        android:layout_marginStart="18dp"
         tools:text="0.10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/start_btn"
+        />
+    <TextView
+        android:id="@+id/timer_note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:text="API call timer"
+        app:layout_constraintStart_toStartOf="@id/timer_text"
+        app:layout_constraintTop_toBottomOf="@id/timer_text"
         />
 
     <TextView
@@ -128,7 +139,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Track on Chart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/usd_chart_switch"
         app:layout_constraintBottom_toTopOf="@id/usd_chart_switch"/>
 
     <androidx.appcompat.widget.SwitchCompat
@@ -158,6 +169,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/eur_rate_text"
         app:layout_constraintBottom_toBottomOf="@id/eur_rate_text"/>
+
+    <TextView
+        android:id="@+id/note"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="(API updates every minute)"
+        app:layout_constraintTop_toBottomOf="@id/start_btn"
+        app:layout_constraintStart_toStartOf="@id/start_btn"
+        app:layout_constraintEnd_toEndOf="@id/start_btn"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

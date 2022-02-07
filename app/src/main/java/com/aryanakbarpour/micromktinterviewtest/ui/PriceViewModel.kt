@@ -29,6 +29,9 @@ class PriceViewModel @Inject constructor(
     private var _recentPricesList = ArrayList<BitCoinPrice>()
     val recentPricesList = _recentPricesList
 
+    /**
+     * Updates viewmodel livedata values by calling the retrofit
+     */
     fun retrieveLatestPrice(){
 
         viewModelScope.launch {
@@ -52,6 +55,9 @@ class PriceViewModel @Inject constructor(
         }
     }
 
+    /**
+     * Clears recent saved prices list
+     */
     fun clearRecentPrices() {
         _recentPricesList.clear()
     }

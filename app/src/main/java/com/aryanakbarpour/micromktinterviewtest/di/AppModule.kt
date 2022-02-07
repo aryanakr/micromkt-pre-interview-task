@@ -10,11 +10,16 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
 
-
+/**
+ * Retrofit provided in a hilt module
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
 
+    /**
+     * Retrofit Dependency Provider
+     */
     @Singleton
     @Provides
     fun providePriceApi(): PriceApiService {

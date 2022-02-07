@@ -11,17 +11,18 @@ class UpdateService : Service() {
     private val timer = Timer()
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        // Set the one minute periodic update
+
         val time = intent?.getDoubleExtra(TIME_EXTRA, 0.0)
         time?.let {
-            println("start timer")
             timer.scheduleAtFixedRate(TimeTask(it), 0, 1000)
         }
-
 
         return START_NOT_STICKY
     }
 
     private inner class TimeTask(private var time:Double) : TimerTask(){
+        // Updating a double (time, extra in intent) to create a tick counter
         override fun run() {
             val intent = Intent(TIMER_UPDATED)
             time++
