@@ -56,13 +56,25 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Update chart when configuration of switches change
-        binding.gbpChartSwitch.setOnClickListener {
+        binding.gbpChartSwitch.setOnCheckedChangeListener { _, value ->
+            if (value) {
+                binding.eurChartSwitch.isChecked = false
+                binding.usdChartSwitch.isChecked = false
+            }
             setChartData()
         }
-        binding.eurChartSwitch.setOnClickListener {
+        binding.eurChartSwitch.setOnCheckedChangeListener { _, value ->
+            if (value) {
+                binding.gbpChartSwitch.isChecked = false
+                binding.usdChartSwitch.isChecked = false
+            }
             setChartData()
         }
-        binding.usdChartSwitch.setOnClickListener {
+        binding.usdChartSwitch.setOnCheckedChangeListener { _, value ->
+            if (value) {
+                binding.eurChartSwitch.isChecked = false
+                binding.gbpChartSwitch.isChecked = false
+            }
             setChartData()
         }
 
