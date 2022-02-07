@@ -97,7 +97,10 @@ class MainActivity : AppCompatActivity() {
 
         binding.lineChart.axisRight.isEnabled = false
         binding.lineChart.legend.isEnabled = true
+        binding.lineChart.legend.textSize = 14.0f
         binding.lineChart.description.isEnabled = false
+
+        binding.lineChart.axisLeft.textSize = 14.0f
 
         xAxis.position = XAxis.XAxisPosition.BOTTOM_INSIDE
     }
@@ -121,10 +124,13 @@ class MainActivity : AppCompatActivity() {
         // Create DataSets
         val gbpLineDataSet = LineDataSet(gbpEntries, "GBP Rate")
         gbpLineDataSet.color = Color.RED
+        gbpLineDataSet.valueTextSize = 10.0f
         val usdLineDataSet = LineDataSet(usdEntries, "USD Rate")
         usdLineDataSet.color = Color.GREEN
+        usdLineDataSet.valueTextSize = 10.0f
         val eurLineDataSet = LineDataSet(eurEntries, "EUR Rate")
         eurLineDataSet.color = Color.BLUE
+        eurLineDataSet.valueTextSize = 10.0f
 
         // List selected currencies dataset
         val dataSets: ArrayList<ILineDataSet> = ArrayList()
