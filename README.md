@@ -3,7 +3,7 @@
 Submission by: Aryan Akbarpour (aryan.akr@yahoo.com)
 
 ## Screenshot
-<img src="application_screenshot.png" width="250">
+<img src="application_screenshot.png" width="350">
 
 ## Implementation
 - Dependency Injection with Hilt
